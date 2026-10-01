@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sukriti Srivastava, Data Engineer</title>
+<meta name="description" content="Sukriti Srivastava: data engineer with three years at NatWest Group, now an MS Data Science student at the University of Maryland. Projects in lakehouses, fraud analytics, complaint routing, churn, and music and mental health.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232E3BFF'/><circle cx='16' cy='16' r='7' fill='%23FFD23F'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF9F2;
+    --ink: #1B1340;
+    --ink-soft: #4F4870;
+    --line: #E6DCCB;
+    --red: #CC4A3C;
+    --teal: #4DB89C;
+    --cobalt: #4652D1;
+    --violet: #7350C4;
+    --sun: #FFDD75;
+    --pink: #F2A0C4;
+    --display: "Bricolage Grotesque", "Arial Black", "Helvetica Neue", sans-serif;
+    --text: "Figtree", "Helvetica Neue", Arial, sans-serif;
+    --wrap: 76rem;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--text); font-size: 1.0625rem; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.locked { overflow: hidden; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--cobalt); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1.5rem; }
+  .skip { position: absolute; left: -999px; top: 0; z-index: 99; background: var(--ink); color: #fff; padding: .6rem 1rem; }
+  .skip:focus { left: 1rem; top: 1rem; }
+
+  /* Header */
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1.25rem; padding-bottom: 1.25rem; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 1.15rem; text-decoration: none; letter-spacing: -0.01em; }
+  .top nav { display: flex; gap: 1.5rem; flex-wrap: wrap; font-weight: 500; font-size: .95rem; }
+  .top nav a { text-decoration: none; }
+  .top nav a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+  /* Hero */
+  .hero { padding: 4.5rem 0 4rem; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(2.75rem, 7.6vw, 6.4rem); line-height: .98; letter-spacing: -0.035em;
+    margin: 0 0 2rem; max-width: 18ch;
+  }
+  .hero h1 .hl { background: var(--sun); padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; border-radius: .12em; }
+  .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: end; }
+  .hero p { font-size: 1.25rem; line-height: 1.55; margin: 0 0 1rem; max-width: 36rem; }
+  .facts { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+  .facts li { display: flex; gap: .8rem; align-items: baseline; font-size: 1rem; }
+  .facts .dot { width: .7rem; height: .7rem; border-radius: 50%; flex: none; transform: translateY(.05rem); }
+  .pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.75rem; }
+  .pill {
+    display: inline-flex; align-items: center; gap: .45rem; padding: .7rem 1.15rem;
+    border-radius: 999px; font-weight: 600; font-size: .95rem; text-decoration: none;
+    border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    font-family: var(--text);
+  }
+  .pill.solid { background: var(--ink); color: var(--bg); }
+  .pill:hover { background: var(--ink); color: var(--bg); }
+  .pill.solid:hover { background: var(--cobalt); border-color: var(--cobalt); }
+
+  /* Section headings */
+  .sec { padding: 4.5rem 0; }
+  .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .sec h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 4.6vw, 3.4rem); letter-spacing: -0.03em; line-height: 1; margin: 0; }
+  .sec-head p { margin: 0; max-width: 30rem; color: var(--ink-soft); }
+
+  /* Project grid */
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
+  .card {
+    position: relative; overflow: hidden; border-radius: 1.75rem;
+    padding: 1.75rem; min-height: 19rem; display: flex; flex-direction: column;
+    color: #fff; isolation: isolate;
+  }
+  .card .art { position: absolute; inset: auto 0 0 auto; width: 70%; max-width: 26rem; z-index: -1; opacity: .95; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .card:hover .art, .card:focus-within .art { transform: translate(-6px,-6px) scale(1.04); }
+  .card .tag { font-weight: 600; font-size: .85rem; padding: .3rem .7rem; border-radius: 999px; background: rgba(255,255,255,.18); align-self: flex-start; }
+  .card h3 { font-family: var(--display); font-weight: 800; font-size: clamp(1.9rem, 3.2vw, 2.8rem); line-height: 1; letter-spacing: -0.03em; margin: 1.1rem 0 .6rem; }
+  .card p { margin: 0; max-width: 26rem; font-size: 1.05rem; line-height: 1.45; }
+  .card .open {
+    margin-top: auto; align-self: flex-start; padding-top: 1.5rem;
+    background: none; border: 0; color: inherit; font: inherit; font-weight: 700; font-size: 1rem; cursor: pointer;
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px;
+  }
+  .card .open::after { content: ""; position: absolute; inset: 0; } /* whole card clickable */
+  .card .open:focus-visible { outline: none; }
+  .card:has(.open:focus-visible) { outline: 4px solid var(--ink); outline-offset: 4px; }
+
+  .c-f1 { grid-column: span 4; background: var(--red); min-height: 24rem; }
+  .c-hs { grid-column: span 2; grid-row: span 2; background: var(--teal); color: var(--ink); }
+  .c-hs .tag { background: rgba(27,19,64,.12); }
+  .c-cc { grid-column: span 2; background: var(--cobalt); }
+  .c-cw { grid-column: span 2; background: var(--violet); }
+  .c-cc, .c-cw { min-height: 21rem; }
+  .c-cc .art, .c-cw .art { width: 52%; opacity: .6; }
+  .c-cc p, .c-cw p { max-width: 17rem; }
+  .c-mx { grid-column: span 6; background: var(--sun); color: var(--ink); min-height: 15rem; }
+  .c-mx .tag { background: rgba(27,19,64,.12); }
+  .c-mx .art { width: 45%; max-width: 30rem; }
+
+  /* Experience */
+  .exp { background: var(--ink); color: #F4EFFF; border-radius: 2.25rem; padding: 3.5rem clamp(1.5rem, 4vw, 3.5rem); }
+  .exp h2 { color: #fff; }
+  .exp .sec-head p { color: #C9C2EA; }
+  .role { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem 2rem; align-items: baseline; margin-bottom: 2.25rem; }
+  .role h3 { font-family: var(--display); font-weight: 700; font-size: 1.6rem; margin: 0; letter-spacing: -0.01em; }
+  .role span { color: #C9C2EA; }
+  .initiatives { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  .init { border-radius: 1.5rem; padding: 1.6rem; background: #2A2160; }
+  .init h4 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.15; margin: 0 0 .8rem; color: #fff; }
+  .init p { margin: 0 0 .9rem; font-size: 1rem; color: #DCD6F5; }
+  .init ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+  .init li { display: flex; gap: .7rem; align-items: baseline; font-size: .97rem; color: #F4EFFF; }
+  .init li b { font-family: var(--display); font-weight: 800; font-size: 1.25rem; min-width: 3.4rem; }
+  .init:nth-child(1) li b { color: var(--sun); }
+  .init:nth-child(2) li b { color: var(--pink); }
+  .init:nth-child(3) li b { color: #6EE7C8; }
+
+  .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; margin-top: 1.1rem; }
+  .edu .init h4 { margin-bottom: .3rem; }
+  .edu .init .when { color: #C9C2EA; font-size: .95rem; margin-bottom: .8rem; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.6rem 2rem; }
+  .skills h3 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin: 0 0 .7rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .45rem; list-style: none; margin: 0; padding: 0; }
+  .chips li { padding: .35rem .8rem; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); font-size: .93rem; font-weight: 500; }
+
+  /* Contact */
+  .contact { background: var(--cobalt); color: #fff; border-radius: 2.25rem; padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem); position: relative; overflow: hidden; }
+  .contact h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 6.5vw, 5.2rem); line-height: .98; letter-spacing: -0.035em; margin: 0 0 1.5rem; max-width: 13ch; }
+  .contact p { font-size: 1.2rem; max-width: 34rem; margin: 0 0 2rem; color: #E4E6FF; }
+  .contact .pill { border-color: #fff; color: #fff; }
+  .contact .pill.solid { background: var(--sun); border-color: var(--sun); color: var(--ink); }
+  .contact .pill:hover { background: #fff; color: var(--cobalt); }
+  .contact .ring { position: absolute; right: -6rem; bottom: -6rem; width: 22rem; height: 22rem; border-radius: 50%; border: 3.5rem solid var(--pink); opacity: .9; pointer-events: none; }
+  footer { padding: 2.5rem 0 3rem; color: var(--ink-soft); font-size: .9rem; }
+
+  /* Case study dialog */
+  dialog.case {
+    border: 0; padding: 0; margin: 0; width: 100%; max-width: 100%; height: 100%; max-height: 100%;
+    background: var(--bg); color: var(--ink);
+  }
+  dialog.case::backdrop { background: rgba(27,19,64,.6); }
+  dialog.case[open] { animation: rise .35s cubic-bezier(.2,.8,.2,1); }
+  @keyframes rise { from { transform: translateY(2.5rem); opacity: 0; } to { transform: none; opacity: 1; } }
+  .case-inner { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+  .case-hero { color: #fff; padding: 1.25rem 0 3.5rem; }
+  .case-hero.dark { color: var(--ink); }
+  .case-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+  .close {
+    border: 2px solid currentColor; background: transparent; color: inherit; border-radius: 999px;
+    padding: .55rem 1.1rem; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .close:hover { background: rgba(255,255,255,.2); }
+  .case-hero .kicker { font-weight: 600; opacity: .9; }
+  .case-hero h2 { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 9vw, 7rem); line-height: .92; letter-spacing: -0.04em; margin: .5rem 0 1rem; }
+  .case-hero .sub { font-size: clamp(1.15rem, 2.2vw, 1.5rem); max-width: 40rem; margin: 0 0 1.75rem; line-height: 1.4; }
+  .case-hero .actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .case-hero .pill { border-color: currentColor; color: inherit; }
+  .case-hero .pill.solid { background: #fff; color: var(--ink); border-color: #fff; }
+  .case-hero.dark .pill.solid { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .case-hero .pill:hover { background: #fff; color: var(--ink); }
+
+  .case-body { display: grid; grid-template-columns: minmax(0, 1fr) 19rem; gap: 3.5rem; padding-top: 3.5rem; padding-bottom: 5rem; }
+  .case-body h3 { font-family: var(--display); font-weight: 800; font-size: 1.75rem; letter-spacing: -0.02em; margin: 2.75rem 0 .8rem; line-height: 1.1; }
+  .case-body h3:first-child { margin-top: 0; }
+  .case-body p { margin: 0 0 1rem; max-width: 42rem; }
+  .case-body ul.points { margin: 0 0 1rem; padding-left: 1.2rem; max-width: 42rem; }
+  .case-body ul.points li { margin-bottom: .6rem; }
+  .case-body ul.points li::marker { color: var(--accent); }
+  .quote { font-family: var(--display); font-weight: 600; font-size: 1.45rem; line-height: 1.3; border-left: 6px solid var(--accent); padding-left: 1.2rem; margin: 1.5rem 0; max-width: 40rem; }
+
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 1.25rem 0 1.5rem; padding: 0; list-style: none; }
+  .flow li { padding: .55rem .95rem; border-radius: .9rem; background: #fff; border: 2px solid var(--accent); font-weight: 600; font-size: .92rem; }
+  .flow li.arrow { border: 0; background: none; padding: 0 .1rem; color: var(--accent); font-size: 1.2rem; }
+
+  .side { align-self: start; position: sticky; top: 1.5rem; display: grid; gap: 1rem; }
+  .stat { background: var(--accent); color: var(--on-accent, #fff); border-radius: 1.4rem; padding: 1.3rem 1.4rem; }
+  .stat b { display: block; font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -0.03em; margin-bottom: .4rem; }
+  .stat span { font-size: .97rem; line-height: 1.4; display: block; }
+  .meta-box { border: 2px solid var(--line); border-radius: 1.4rem; padding: 1.2rem 1.4rem; background: #fff; }
+  .meta-box h4 { margin: 0 0 .6rem; font-family: var(--display); font-size: 1rem; }
+  .meta-box .chips li { background: var(--bg); }
+
+  .next { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; border-top: 2px solid var(--line); padding-top: 2rem; padding-bottom: 3rem; }
+  .next button { background: none; border: 0; font: inherit; font-family: var(--display); font-weight: 700; font-size: 1.3rem; cursor: pointer; color: var(--ink); padding: 0; text-align: left; }
+  .next button small { display: block; font-family: var(--text); font-weight: 500; font-size: .9rem; color: var(--ink-soft); }
+  .next button:hover span { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 5px; }
+
+  #f1 { --accent: var(--red); } #f1 .case-hero { background: var(--red); }
+  #healthshield { --accent: var(--teal); --on-accent: var(--ink); } #healthshield .case-hero { background: var(--teal); }
+  #claricase { --accent: var(--cobalt); } #claricase .case-hero { background: var(--cobalt); }
+  #churnwave { --accent: var(--violet); } #churnwave .case-hero { background: var(--violet); }
+  #mxmh { --accent: #D9A400; --on-accent: var(--ink); } #mxmh .case-hero { background: var(--sun); }
+  #mxmh .stat { background: var(--sun); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .c-f1, .c-mx { grid-column: span 2; }
+    .c-hs { grid-column: span 2; grid-row: auto; }
+    .c-cc, .c-cw { grid-column: span 1; }
+    .initiatives { grid-template-columns: 1fr; }
+    .case-body { grid-template-columns: 1fr; gap: 2rem; }
+    .side { position: static; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+  }
+  @media (max-width: 620px) {
+    .top nav { display: none; }
+    .hero { padding-top: 2.5rem; }
+    .grid { grid-template-columns: 1fr; }
+    .c-f1, .c-mx, .c-hs, .c-cc, .c-cw { grid-column: span 1; }
+    .card { min-height: 17rem; }
+    .c-mx .art { width: 70%; }
+    .edu { grid-template-columns: 1fr; }
+    .sec { padding: 3.25rem 0; }
+  }
+
+  /* ---- softer type and readability ---- */
+  .card h3 { font-weight: 700; }
+  .card p { font-size: 1rem; line-height: 1.55; }
+  .card .art { opacity: .4 !important; }
+  .c-hs .art, .c-mx .art { opacity: .5 !important; }
+  .sec h2, .contact h2 { font-weight: 700; }
+  .case-hero h2 { font-weight: 700; }
+  .exp { background: #2B2452; }
+  .init { background: #3A3268; }
+  .init p { color: #E6E1F7; line-height: 1.6; }
+  .init:nth-child(3) li b { color: #8FDCC6; }
+  .contact .ring { border-width: 2.5rem; opacity: .7; }
+
+  /* ---- hero ---- */
+  .hero .hello { font-family: var(--display); font-weight: 600; font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 0 0 .4rem; color: var(--ink-soft); }
+  .hero h1 { font-weight: 700; font-size: clamp(3rem, 8vw, 6rem); max-width: none; margin-bottom: .6rem; }
+  .hero .role-line { font-family: var(--display); font-weight: 500; font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.25; margin: 0 0 2.5rem; max-width: 30ch; }
+  .role-line mark { background: var(--sun); color: inherit; padding: 0 .15em; border-radius: .2em; }
+
+  /* ---- second role ---- */
+  .role.second { margin-top: 3rem; margin-bottom: 1.25rem; }
+  .intern { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 2rem; align-items: start; }
+  .intern ul { align-self: center; }
+  .intern li b { color: var(--pink); }
+  @media (max-width: 760px) { .intern { grid-template-columns: 1fr; gap: 1rem; } }
+
+  /* ---- education ---- */
+  .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+  .school { border-radius: 1.75rem; padding: 2rem; }
+  .school.umd { background: #E3E6FA; }
+  .school.mit { background: #FBE6E2; }
+  .school h3 { font-family: var(--display); font-weight: 700; font-size: 1.55rem; line-height: 1.15; margin: 0 0 .35rem; }
+  .school .deg { font-weight: 600; margin: 0 0 .2rem; }
+  .school .when { color: var(--ink-soft); margin: 0 0 1.2rem; }
+  .school .badges { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .school .badge { background: var(--ink); color: #fff; border-radius: 999px; padding: .3rem .85rem; font-size: .88rem; font-weight: 600; }
+  .school h4 { font-size: .95rem; margin: 0 0 .6rem; font-weight: 600; }
+  .school .chips li { background: rgba(255,255,255,.75); border-color: transparent; }
+
+  /* ---- skills ---- */
+  .legend { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: .92rem; color: var(--ink-soft); margin: -0.75rem 0 1.75rem; }
+  .legend span { display: inline-flex; align-items: center; gap: .5rem; }
+  .k { display: inline-block; width: 1.4rem; height: .85rem; border-radius: 999px; }
+  .k.prod { background: var(--ink); }
+  .k.proj { background: #fff; border: 1.5px solid var(--ink-soft); }
+  .skill-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
+  .sk { border-radius: 1.75rem; padding: 1.6rem 1.6rem 1.75rem; grid-column: span 2; }
+  .sk.wide { grid-column: span 3; }
+  .sk h3 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; margin: 0 0 .3rem; }
+  .sk > p { margin: 0 0 1.1rem; color: var(--ink-soft); font-size: .97rem; line-height: 1.5; }
+  .sk .chips li { background: #fff; border: 1.5px solid rgba(27,19,64,.18); }
+  .sk .chips li.prod { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .sk-de { background: #FBE6E2; } .sk-cloud { background: #E3E6FA; } .sk-db { background: #DDF2EB; }
+  .sk-ml { background: #ECE5F8; } .sk-lang { background: #FFF1C7; }
+
+  /* ---- outside data ---- */
+  .sec-head.stacked { flex-direction: column; align-items: flex-start; gap: .75rem; }
+  .life { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.1rem; }
+  .hob { border-radius: 1.75rem; padding: 1.5rem; min-height: 13rem; display: flex; flex-direction: column; }
+  .hob svg { width: 3rem; height: 3rem; margin-bottom: auto; }
+  .hob h3 { font-family: var(--display); font-weight: 700; font-size: 1.25rem; line-height: 1.15; margin: 1.5rem 0 .35rem; }
+  .hob p { margin: 0; font-size: .95rem; line-height: 1.5; color: var(--ink-soft); }
+  .h1c { background: #DDF2EB; } .h2c { background: #ECE5F8; } .h3c { background: #FFF1C7; } .h4c { background: #E3E6FA; } .h5c { background: #F3E3D3; }
+
+  @media (max-width: 960px) {
+    .skill-grid { grid-template-columns: repeat(2, 1fr); }
+    .sk, .sk.wide { grid-column: span 1; }
+    .life { grid-template-columns: repeat(2, 1fr); }
+    .life .hob:last-child { grid-column: span 2; }
+  }
+  @media (max-width: 620px) {
+    .edu-grid, .skill-grid { grid-template-columns: 1fr; }
+    .life { grid-template-columns: 1fr; }
+    .life .hob:last-child { grid-column: span 1; }
+    .hob { min-height: 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap top">
+  <a class="logo" href="#top">Sukriti Srivastava</a>
+  <nav aria-label="Sections">
+    <a href="#work">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#outside">Outside data</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="wrap hero" id="top">
+    <p class="hello">Hi, I'm</p>
+    <h1>Sukriti Srivastava</h1>
+    <p class="role-line">A <mark>data engineer</mark> who builds the pipelines that analytics and AI run on.</p>
+    <div class="hero-grid">
+      <div>
+        <p>I spent three years at NatWest Group building the frameworks behind a bank's data platform. Teams used them to launch pipelines through configuration instead of custom code, trace every dataset end to end, and deploy without manual steps. I also led the migration of more than 200 production pipelines onto them.</p>
+        <p>Now I'm pursuing a master's in Data Science at the University of Maryland, expanding from pipelines into what they power: lakehouse architecture, machine learning, and AI.</p>
+        <div class="pills">
+          <a class="pill solid" href="#work">See my projects</a>
+          <a class="pill" href="resume.pdf">Download resume</a>
+        </div>
+      </div>
+      <ul class="facts" aria-label="Quick facts">
+        <li><span class="dot" style="background:var(--red)"></span>3 years as a data engineer at NatWest Group</li>
+        <li><span class="dot" style="background:var(--teal)"></span>MS Data Science, University of Maryland</li>
+        <li><span class="dot" style="background:var(--cobalt)"></span>Graduating May 2027, open to full-time roles</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="work" aria-labelledby="work-h">
+    <div class="sec-head">
+      <h2 id="work-h">Projects</h2>
+      <p>Each one opens into a full case study: the question, how it's built, the decisions behind it, and what it can and can't tell you.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card c-f1">
+        <svg class="art" viewBox="0 0 400 260" aria-hidden="true">
+          <path d="M40 210 C 40 120, 120 160, 150 90 S 260 30, 300 80 S 380 200, 300 225 S 160 230, 120 215 S 40 250, 40 210 Z" fill="none" stroke="#fff" stroke-width="14" stroke-linejoin="round" opacity=".9"/>
+          <g fill="#fff"><rect x="318" y="20" width="16" height="16"/><rect x="350" y="20" width="16" height="16"/><rect x="334" y="36" width="16" height="16"/><rect x="366" y="36" width="16" height="16"/><rect x="318" y="52" width="16" height="16"/><rect x="350" y="52" width="16" height="16"/></g>
+        </svg>
+        <span class="tag">Data engineering</span>
+        <h3>F1-Analytics</h3>
+        <p>A Databricks lakehouse over 77 seasons of Formula 1, from raw API data to a dashboard and a 2026 championship forecast.</p>
+        <button class="open" data-open="f1">Read the case study</button>
+      </article>
+
+      <article class="card c-hs">
+        <svg class="art" viewBox="0 0 300 300" aria-hidden="true">
+          <polyline points="0,190 70,190 95,130 125,250 155,90 185,210 205,190 300,190" fill="none" stroke="#1B1340" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" opacity=".85"/>
+          <rect x="210" y="30" width="22" height="70" rx="4" fill="#fff"/><rect x="186" y="54" width="70" height="22" rx="4" fill="#fff"/>
+        </svg>
+        <span class="tag">Data engineering + ML</span>
+        <h3>HealthShield</h3>
+        <p>A reproducible pipeline over 558K Medicare claims that flags likely fraud and forecasts what member groups will cost.</p>
+        <button class="open" data-open="healthshield">Read the case study</button>
+      </article>
+
+      <article class="card c-cc">
+        <svg class="art" viewBox="0 0 300 220" aria-hidden="true">
+          <g stroke="#fff" stroke-width="5" fill="none" opacity=".75">
+            <path d="M40 110 C 140 110, 160 20, 260 20"/><path d="M40 110 C 140 110, 160 56, 260 56"/><path d="M40 110 C 140 110, 160 92, 260 92"/><path d="M40 110 C 140 110, 160 128, 260 128"/><path d="M40 110 C 140 110, 160 164, 260 164"/><path d="M40 110 C 140 110, 160 200, 260 200"/>
+          </g>
+          <circle cx="40" cy="110" r="16" fill="#FFD23F"/>
+          <g fill="#fff"><circle cx="262" cy="20" r="9"/><circle cx="262" cy="56" r="9"/><circle cx="262" cy="92" r="9"/><circle cx="262" cy="128" r="9"/><circle cx="262" cy="164" r="9"/><circle cx="262" cy="200" r="9"/></g>
+        </svg>
+        <span class="tag">Machine learning</span>
+        <h3>ClariCase</h3>
+        <p>Reads a consumer complaint and sends it to the right one of 11 support teams.</p>
+        <button class="open" data-open="claricase">Read the case study</button>
+      </article>
+
+      <article class="card c-cw">
+        <svg class="art" viewBox="0 0 300 200" aria-hidden="true">
+          <g fill="none" stroke-width="10" stroke-linecap="round">
+            <path d="M10 70 Q 60 30 110 70 T 210 70 T 310 70" stroke="#FF7AB6"/>
+            <path d="M10 120 Q 60 80 110 120 T 210 120 T 310 120" stroke="#fff" opacity=".85"/>
+            <path d="M10 170 Q 60 130 110 170 T 210 170 T 310 170" stroke="#FFD23F"/>
+          </g>
+        </svg>
+        <span class="tag">Machine learning</span>
+        <h3>ChurnWave</h3>
+        <p>Spots telecom customers likely to leave and suggests what to do about each one.</p>
+        <button class="open" data-open="churnwave">Read the case study</button>
+      </article>
+
+      <article class="card c-mx">
+        <svg class="art" viewBox="0 0 420 200" aria-hidden="true">
+          <g fill="#1B1340">
+            <rect x="20" y="110" width="26" height="90" rx="13"/><rect x="62" y="60" width="26" height="140" rx="13"/><rect x="104" y="130" width="26" height="70" rx="13"/><rect x="146" y="30" width="26" height="170" rx="13"/><rect x="188" y="90" width="26" height="110" rx="13"/><rect x="230" y="140" width="26" height="60" rx="13"/><rect x="272" y="70" width="26" height="130" rx="13"/><rect x="314" y="115" width="26" height="85" rx="13"/><rect x="356" y="50" width="26" height="150" rx="13"/>
+          </g>
+          <circle cx="370" cy="25" r="14" fill="#FF7AB6"/>
+        </svg>
+        <span class="tag">Analytics</span>
+        <h3>MxMH: Music and Mental Health</h3>
+        <p>Does music actually help how we feel? A survey analysis, a Tableau dashboard, and a few findings that surprised me.</p>
+        <button class="open" data-open="mxmh">Read the case study</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="experience" aria-labelledby="exp-h">
+    <div class="exp">
+      <div class="sec-head">
+        <h2 id="exp-h">Experience</h2>
+        <p>Three years building the tools behind a major UK bank's data platform, and before that, testing safety-critical railway systems.</p>
+      </div>
+      <div class="role">
+        <h3>Software Engineer (Data Engineer), NatWest Group</h3>
+        <span>Bangalore, India. July 2022 to August 2025</span>
+      </div>
+
+      <div class="initiatives">
+        <div class="init">
+          <h4>SageMaker pipeline framework</h4>
+          <p>My most recent work. I built a shared framework so teams could start a new data pipeline from a tested template instead of from scratch, with CloudWatch monitoring wired in from day one.</p>
+          <ul>
+            <li><b>8</b> reusable pipeline templates</li>
+            <li><b>70%</b> faster pipeline setup</li>
+          </ul>
+        </div>
+        <div class="init">
+          <h4>Spark/Scala framework</h4>
+          <p>A metadata-driven framework for batch and streaming jobs, triggered by Kafka events and orchestrated through Airflow. Teams described a pipeline in configuration rather than writing custom code. I led the migration of existing pipelines onto it, added OpenLineage so every dataset could be traced end to end, and automated promotion through five environments with GitLab CI/CD.</p>
+          <ul>
+            <li><b>200+</b> ETL pipelines migrated</li>
+            <li><b>60%</b> faster pipeline onboarding</li>
+            <li><b>80%</b> less time spent debugging</li>
+            <li><b>90%</b> less manual deployment work</li>
+          </ul>
+        </div>
+        <div class="init">
+          <h4>S3 to Snowflake ETL</h4>
+          <p>Where I started. I built ETL pipelines moving data from AWS S3 into Snowflake, with quality checks across six dimensions so analysts downstream received data they could use without cleaning it again.</p>
+          <ul>
+            <li><b>50+</b> Informatica pipelines</li>
+            <li><b>6</b> data quality dimensions checked</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role second">
+        <h3>Application Engineer Intern, Frauscher Sensor Technology</h3>
+        <span>Gurugram, India. January to June 2022</span>
+      </div>
+      <div class="init intern">
+        <div>
+          <h4>Train detection validation</h4>
+          <p>Frauscher's Axle Counting System (FAdC) detects trains by counting their axles as they pass sensors on the track, which tells the signalling system whether a section of line is clear. In a safety-critical setting like this, a missed or false detection is not an option.</p>
+          <p>I worked with the engineering team to design, test, and validate the system across railway and metro projects, using system verification and analysis of test data to confirm it detected trains reliably.</p>
+        </div>
+        <ul>
+          <li><b>99%+</b> precision in train detection across railway and metro projects</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="education" aria-labelledby="edu-h">
+    <div class="sec-head">
+      <h2 id="edu-h">Education</h2>
+      <p>An engineering foundation from Manipal, and now a master's focused on data at scale and AI.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="school umd">
+        <h3>University of Maryland, College Park</h3>
+        <p class="deg">Master of Science in Data Science</p>
+        <p class="when">August 2025 to May 2027 (expected)</p>
+        <div class="badges"><span class="badge">GPA 4.0</span></div>
+        <h4>Coursework</h4>
+        <ul class="chips"><li>Probability and Statistics</li><li>Principles of Data Science</li><li>Big Data Systems</li><li>Algorithms for Data Science</li><li>Principles of Machine Learning</li><li>Generative AI</li><li>Agentic AI</li><li>Natural Language Processing</li></ul>
+      </div>
+      <div class="school mit">
+        <h3>Manipal Institute of Technology</h3>
+        <p class="deg">B.Tech in Electronics and Communication Engineering</p>
+        <p class="when">July 2018 to July 2022</p>
+        <div class="badges"><span class="badge">CGPA 8.68</span></div>
+        <h4>Minor</h4>
+        <ul class="chips"><li>Fundamentals of Computing</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="skills" aria-labelledby="skills-h">
+    <div class="sec-head">
+      <h2 id="skills-h">Skills</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="sk sk-de wide">
+        <h3>Data engineering</h3>
+        <p>Building batch and streaming pipelines, orchestrating them, and tracing every dataset end to end.</p>
+        <ul class="chips"><li>Apache Spark</li><li>Airflow</li><li>Kafka</li><li>Informatica</li><li>OpenLineage</li><li>PySpark</li><li>Databricks</li><li>Delta Lake</li><li>Unity Catalog</li><li>Lakeflow Jobs</li></ul>
+      </div>
+      <div class="sk sk-cloud wide">
+        <h3>Cloud and DevOps</h3>
+        <p>Running pipelines in the cloud and shipping them safely through every environment.</p>
+        <ul class="chips"><li>AWS S3</li><li>CloudWatch</li><li>SageMaker Unified Studio</li><li>GitLab CI/CD</li><li>Docker</li><li>Git</li><li>Linux</li></ul>
+      </div>
+      <div class="sk sk-db">
+        <h3>Databases and warehouses</h3>
+        <p>Where the data lands, from enterprise warehouses to lightweight app backends.</p>
+        <ul class="chips"><li>Snowflake</li><li>PostgreSQL</li><li>SQLite</li><li>Supabase</li></ul>
+      </div>
+      <div class="sk sk-ml">
+        <h3>ML and analytics</h3>
+        <p>Modeling, evaluating honestly, and putting results in front of people.</p>
+        <ul class="chips"><li>scikit-learn</li><li>XGBoost</li><li>Pandas</li><li>NumPy</li><li>Streamlit</li><li>Tableau</li></ul>
+      </div>
+      <div class="sk sk-lang">
+        <h3>Languages</h3>
+        <p>The everyday tools underneath all of it.</p>
+        <ul class="chips"><li>Scala</li><li>SQL</li><li>Python</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="outside" aria-labelledby="out-h">
+    <div class="sec-head stacked">
+      <h2 id="out-h">Outside data</h2>
+      <p>How I recharge when I log off.</p>
+    </div>
+    <div class="life">
+      <div class="hob h1c">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 44s14-13.5 14-24a14 14 0 0 0-28 0c0 10.5 14 24 14 24z" fill="#4DB89C"/><circle cx="24" cy="20" r="5.5" fill="#FFF9F2"/></svg>
+        <h3>Travelling</h3>
+        <p>Exploring new cities is my favorite way to spend time off.</p>
+      </div>
+      <div class="hob h2c">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="26" rx="5" fill="#7350C4"/><path d="M21 16.5v11l9-5.5z" fill="#FFF9F2"/><rect x="16" y="38" width="16" height="3.5" rx="1.75" fill="#7350C4"/></svg>
+        <h3>TV shows and movies</h3>
+        <p>Always happy to trade recommendations.</p>
+      </div>
+      <div class="hob h3c">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 6l9 20 9-20z" fill="#FFF9F2" stroke="#1B1340" stroke-width="2.5" stroke-linejoin="round"/><path d="M19.5 6l4.5 20M28.5 6L24 26" stroke="#1B1340" stroke-width="2"/><circle cx="24" cy="33" r="8" fill="#CC4A3C"/></svg>
+        <h3>Badminton</h3>
+        <p>My go-to way to get moving.</p>
+      </div>
+      <div class="hob h4c">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="34" height="34" rx="8" fill="#4652D1"/><g fill="#FFF9F2"><circle cx="16" cy="16" r="3.2"/><circle cx="32" cy="16" r="3.2"/><circle cx="24" cy="24" r="3.2"/><circle cx="16" cy="32" r="3.2"/><circle cx="32" cy="32" r="3.2"/></g></svg>
+        <h3>Board games</h3>
+        <p>The best excuse to get friends around one table.</p>
+      </div>
+      <div class="hob h5c">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 18h26v12a10 10 0 0 1-10 10h-6A10 10 0 0 1 8 30z" fill="#8A5A3B"/><path d="M34 21h3a5 5 0 0 1 0 10h-3" fill="none" stroke="#8A5A3B" stroke-width="3.5"/><path d="M16 6c-2 3 2 5 0 8M24 6c-2 3 2 5 0 8" stroke="#8A5A3B" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        <h3>Coffee</h3>
+        <p>A proud coffee fan. It fuels most of what's on this page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="contact" aria-labelledby="contact-h">
+    <div class="contact">
+      <div class="ring" aria-hidden="true"></div>
+      <h2 id="contact-h">Let's talk about your data.</h2>
+      <p>I'm looking for full-time data engineering and data science roles starting in 2027.</p>
+      <div class="pills">
+        <a class="pill solid" href="mailto:srivastavasukriti2000@gmail.com" aria-label="Email Sukriti">Email me</a>
+        <a class="pill" href="https://www.linkedin.com/in/sukriti-124-srivastava">LinkedIn</a>
+        <a class="pill" href="https://github.com/Sukriti-124">GitHub</a>
+        <a class="pill" href="resume.pdf">Resume</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Sukriti Srivastava, College Park, Maryland. Hosted on GitHub Pages.</footer>
+
+<!-- ============ CASE STUDIES ============ -->
+
+<dialog class="case" id="f1" aria-labelledby="f1-t">
+  <div class="case-inner">
+    <header class="case-hero">
+      <div class="wrap">
+        <div class="case-bar"><span class="kicker">Case study 1 of 5</span><button class="close" data-close>Close</button></div>
+        <div class="kicker">Data engineering</div>
+        <h2 id="f1-t">F1-Analytics</h2>
+        <p class="sub">A complete lakehouse on Databricks: 77 seasons of Formula 1 data, loaded incrementally, modeled for analysis, and used to forecast the 2026 championship.</p>
+        <div class="actions"><a class="pill solid" href="https://github.com/Sukriti-124/F1-Analytics">View code on GitHub</a></div>
+      </div>
+    </header>
+    <div class="wrap case-body">
+      <div>
+        <h3>Why I built it</h3>
+        <p>At NatWest I worked on pieces of a large data platform, but never got to build one end to end on a modern lakehouse stack. Formula 1 is a great dataset for that: every race since 1950, with drivers, constructors, results and standings that all relate to each other in ways that reward good modeling.</p>
+        <p>The goal was to treat it like a production system rather than a notebook: governed storage, repeatable loads, scheduled jobs, and a clean analytical layer that anyone could query.</p>
+
+        <h3>How it works</h3>
+        <ul class="flow" aria-label="Pipeline stages">
+          <li>Ergast API</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Bronze: raw</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Silver: cleaned</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Gold: models and views</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Dashboard and forecast</li>
+        </ul>
+        <p>Data lands from the Ergast API into a bronze layer exactly as received, so there is always an untouched copy to reprocess from. The silver layer cleans and conforms it, and the gold layer holds the data models analysts actually use. Everything is stored in Delta Lake, governed through Unity Catalog, and orchestrated with Lakeflow Jobs.</p>
+        <p>Loading is incremental: when a new race weekend arrives, only the new results are processed, instead of rebuilding 77 seasons of history every time. That's the difference between a pipeline you run once and one you can leave running all season.</p>
+        <p>On top of the gold layer sit six analytical views, covering driver standings, constructor standings, and teammate head-to-head comparisons, which power an AI/BI dashboard.</p>
+
+        <h3>The 2026 forecast</h3>
+        <p>The last piece is a scoring model that predicts the 2026 championship order. It looks at the past five seasons of driver and constructor results and weights them with exponential decay, so last year counts far more than five years ago. Recent form is a much better guide than career totals.</p>
+        <p>New teams create a gap: they have no history to score. Rather than giving them zero, which would rank them unfairly last, the model gives them a median baseline.</p>
+
+        <h3>What I'd flag honestly</h3>
+        <p>2026 brought one of the biggest regulation changes in years, which resets a lot of the competitive order. So even recent form is a weaker predictor this season than usual. The forecast is a reasoned starting point, not a crystal ball, and comparing it against the real results as the season goes on is half the fun.</p>
+      </div>
+      <aside class="side">
+        <div class="stat"><b>77</b><span>seasons of race data, 1950 to 2026</span></div>
+        <div class="stat"><b>6</b><span>analytical views in the gold layer</span></div>
+        <div class="meta-box"><h4>Built with</h4><ul class="chips"><li>Databricks</li><li>PySpark</li><li>Delta Lake</li><li>Unity Catalog</li><li>Lakeflow Jobs</li><li>SQL</li><li>AI/BI dashboards</li></ul></div>
+      </aside>
+    </div>
+    <nav class="wrap next" aria-label="More case studies">
+      <span></span>
+      <button data-open="healthshield"><small>Next case study</small><span>HealthShield</span></button>
+    </nav>
+  </div>
+</dialog>
+
+<dialog class="case" id="healthshield" aria-labelledby="hs-t">
+  <div class="case-inner">
+    <header class="case-hero dark">
+      <div class="wrap">
+        <div class="case-bar"><span class="kicker">Case study 2 of 5</span><button class="close" data-close>Close</button></div>
+        <div class="kicker">Data engineering + machine learning</div>
+        <h2 id="hs-t">HealthShield</h2>
+        <p class="sub">Two health insurance problems on one reproducible pipeline: which providers are worth investigating for fraud, and how much will a group of members cost?</p>
+        <div class="actions">
+          <a class="pill solid" href="https://healthshield-yh443pyhbwd66ojg2sdntk.streamlit.app/">Try the live app</a>
+          <a class="pill" href="https://github.com/Sukriti-124/healthshield">View code on GitHub</a>
+        </div>
+      </div>
+    </header>
+    <div class="wrap case-body">
+      <div>
+        <h3>The problem</h3>
+        <p>Insurers lose money two ways: to fraudulent claims, and to costs they didn't plan for. Fraud investigators can only look at so many providers, so the useful question isn't "is this provider fraudulent?" but "if we can only check a handful, which ones first?" And for cost, finance teams need to budget for groups of members, not guess at individuals.</p>
+        <p>I worked on both, using 558,000 Medicare claims from 5,410 providers and records for 100,000 members.</p>
+
+        <h3>How it works</h3>
+        <ul class="flow" aria-label="Pipeline stages">
+          <li>Raw claims and members</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Bronze</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Silver + quality tests</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Gold features</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Models</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Streamlit dashboard</li>
+        </ul>
+        <p>The pipeline follows the same bronze, silver and gold layering I'd use at work, with unit tests checking data quality as it moves between layers. A single command rebuilds everything from raw data to final metrics, so anyone can reproduce the results.</p>
+        <p>The Streamlit dashboard reads its numbers straight from the files the pipeline writes. Nothing is typed in by hand, so the dashboard can never drift from what the models actually produced.</p>
+
+        <h3>Guardrails that caught real problems</h3>
+        <p>I built leakage and fairness audits into the pipeline, and they earned their place. One feature turned out to predict the cost target almost perfectly, with an R² of 0.932, because it was effectively derived from the answer. The audit caught it before it reached modeling. Another check found a strong size-related bias in the fraud labels: larger providers were far more likely to be labeled fraudulent, which a naive model would happily learn as a shortcut.</p>
+
+        <h3>Results, and how I tested them</h3>
+        <p>For fraud, I compared the model against a simple baseline that just flags the providers billing the most. If a model can't beat that, it isn't adding anything. I also fixed the decision threshold before looking at test results, so I couldn't tune my way to a better number.</p>
+        <ul class="points">
+          <li>Among the top 5% of providers the model flags, 84% are fraudulent, compared with 9.4% if you picked at random.</li>
+          <li>It beats the billing-volume baseline by 0.073 PR-AUC, with a 95% confidence interval to show the gain isn't luck.</li>
+          <li>The cost model estimates total cost for a 20,000-member group to within 0.79%.</li>
+        </ul>
+
+        <h3>What the cost model can't do</h3>
+        <p>For a single member, the cost model's typical error is 87% of the median member's cost. That sounds bad, and for pricing an individual policy it would be. But individual healthcare costs are hugely unpredictable, and those errors cancel out across a group. So the honest conclusion is that this model is a budgeting tool, not a pricing tool, and I'd rather say that clearly than hide it.</p>
+      </div>
+      <aside class="side">
+        <div class="stat"><b>84%</b><span>of top-flagged providers were fraudulent, vs 9.4% at random</span></div>
+        <div class="stat"><b>0.79%</b><span>error on total cost for a 20,000-member group</span></div>
+        <div class="stat"><b>558K</b><span>Medicare claims from 5,410 providers</span></div>
+        <div class="meta-box"><h4>Built with</h4><ul class="chips"><li>Python</li><li>SQL</li><li>SQLite</li><li>scikit-learn</li><li>Streamlit</li></ul></div>
+      </aside>
+    </div>
+    <nav class="wrap next" aria-label="More case studies">
+      <button data-open="f1"><small>Previous</small><span>F1-Analytics</span></button>
+      <button data-open="claricase"><small>Next case study</small><span>ClariCase</span></button>
+    </nav>
+  </div>
+</dialog>
+
+<dialog class="case" id="claricase" aria-labelledby="cc-t">
+  <div class="case-inner">
+    <header class="case-hero">
+      <div class="wrap">
+        <div class="case-bar"><span class="kicker">Case study 3 of 5</span><button class="close" data-close>Close</button></div>
+        <div class="kicker">Machine learning</div>
+        <h2 id="cc-t">ClariCase</h2>
+        <p class="sub">A consumer writes a complaint in their own words. ClariCase reads it, sends it to the right support team, and gives them a tracking ID.</p>
+        <div class="actions">
+          <a class="pill solid" href="https://claricase-enmuypbz78oqjgiec98bhw.streamlit.app/">Try the live app</a>
+          <a class="pill" href="https://github.com/farcypeer46/ClariCase">View code on GitHub</a>
+        </div>
+      </div>
+    </header>
+    <div class="wrap case-body">
+      <div>
+        <h3>The problem</h3>
+        <p>When someone complains to a bank about a credit report error or a mortgage problem, the complaint usually lands in a general queue and waits for a person to read it and pass it on. Every hop adds days. With 11 possible teams, from Credit Reporting to Mortgage, getting it right the first time matters.</p>
+        <p>ClariCase is built on real complaints filed with the U.S. Consumer Financial Protection Bureau: about 1.9 GB of complaints from 2024 and 2025, written by real people in plain, messy language.</p>
+
+        <h3>How it works</h3>
+        <ul class="flow" aria-label="System stages">
+          <li>Complaint text</li><li class="arrow" aria-hidden="true">→</li>
+          <li>TF-IDF features</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Calibrated classifier</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Confident? Auto-route</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Unsure? Human review</li>
+        </ul>
+        <p>The model turns complaint text into TF-IDF features and classifies it with a calibrated Naive Bayes model. Calibration means a 90% confidence score really is right about 90% of the time, which makes it possible to set a confidence bar: complaints above it are routed automatically, and everything else goes to a person.</p>
+        <p>The app runs on Streamlit, stores complaints and their tracking IDs in Supabase, and falls back to a local SQLite database if the connection drops.</p>
+
+        <h3>Decisions that mattered</h3>
+        <ul class="points">
+          <li><strong>Test on the future, not a random sample.</strong> The model was trained on earlier complaints and tested on 109,834 complaints from October to December 2025. That mirrors real use, where the model always sees complaints newer than its training data.</li>
+          <li><strong>Precision over coverage.</strong> A wrongly routed complaint is worse than one that waits for a human. So the main measure is how many complaints can be routed automatically while staying very accurate, not raw accuracy across everything.</li>
+          <li><strong>Learn from all banks.</strong> An earlier baseline was trained only on JPMorgan Chase complaints. Training on the full multi-bank data roughly doubled what could be routed safely.</li>
+        </ul>
+
+        <h3>Results</h3>
+        <p>ClariCase routes 46.5% of complaints automatically at 94.4% precision, up from 26.4% with the earlier baseline. Across all complaints, overall accuracy is 0.800 with a macro F1 of 0.647. The project is still in active development.</p>
+      </div>
+      <aside class="side">
+        <div class="stat"><b>46.5%</b><span>of complaints routed automatically at 94.4% precision</span></div>
+        <div class="stat"><b>11</b><span>support teams to choose between</span></div>
+        <div class="stat"><b>109,834</b><span>complaints in the held-out test period</span></div>
+        <div class="meta-box"><h4>Built with</h4><ul class="chips"><li>Python</li><li>scikit-learn</li><li>Supabase</li><li>SQLite</li><li>Streamlit</li></ul></div>
+      </aside>
+    </div>
+    <nav class="wrap next" aria-label="More case studies">
+      <button data-open="healthshield"><small>Previous</small><span>HealthShield</span></button>
+      <button data-open="churnwave"><small>Next case study</small><span>ChurnWave</span></button>
+    </nav>
+  </div>
+</dialog>
+
+<dialog class="case" id="churnwave" aria-labelledby="cw-t">
+  <div class="case-inner">
+    <header class="case-hero">
+      <div class="wrap">
+        <div class="case-bar"><span class="kicker">Case study 4 of 5</span><button class="close" data-close>Close</button></div>
+        <div class="kicker">Machine learning</div>
+        <h2 id="cw-t">ChurnWave</h2>
+        <p class="sub">Which customers are about to leave, and what should the retention team do about each one? An app that answers both.</p>
+        <div class="actions">
+          <a class="pill solid" href="https://churnwave-egohu7ca9tdeptxdpj5faf.streamlit.app/">Try the live app</a>
+          <a class="pill" href="https://github.com/Sukriti-124/ChurnWave">View code on GitHub</a>
+        </div>
+      </div>
+    </header>
+    <div class="wrap case-body">
+      <div>
+        <h3>The problem</h3>
+        <p>For a telecom company, keeping a customer is far cheaper than winning a new one. But a churn score on its own doesn't help much. A retention team needs to know who to call first and what to offer, and they need it for a whole customer list at once, not one record at a time.</p>
+
+        <h3>How it works</h3>
+        <ul class="flow" aria-label="App flow">
+          <li>Customer data</li><li class="arrow" aria-hidden="true">→</li>
+          <li>4-model ensemble</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Risk tier</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Retention action</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Export</li>
+        </ul>
+        <p>I trained four models on 7,043 telecom customer records and combined them into an ensemble. The best model reaches a ROC-AUC of 0.887, meaning it ranks a customer who will leave above one who won't about 89% of the time.</p>
+        <p>The app turns those scores into something a team can act on. Each customer is placed in a risk tier, and each tier comes with a retention recommendation. You can score one customer by hand, or upload a whole CSV or Excel file, score everyone at once, and export the results.</p>
+
+        <h3>Why risk tiers instead of raw scores</h3>
+        <p>A probability like 0.73 means little to someone running a retention campaign. Tiers translate the model into decisions: who gets a call this week, who gets an offer, and who is fine for now. That small design choice is what makes the model usable by people who will never look at a ROC curve.</p>
+      </div>
+      <aside class="side">
+        <div class="stat"><b>0.887</b><span>ROC-AUC for the best model</span></div>
+        <div class="stat"><b>7,043</b><span>customer records</span></div>
+        <div class="meta-box"><h4>Built with</h4><ul class="chips"><li>Python</li><li>scikit-learn</li><li>XGBoost</li><li>Pandas</li><li>Streamlit</li></ul></div>
+      </aside>
+    </div>
+    <nav class="wrap next" aria-label="More case studies">
+      <button data-open="claricase"><small>Previous</small><span>ClariCase</span></button>
+      <button data-open="mxmh"><small>Next case study</small><span>MxMH</span></button>
+    </nav>
+  </div>
+</dialog>
+
+<dialog class="case" id="mxmh" aria-labelledby="mx-t">
+  <div class="case-inner">
+    <header class="case-hero dark">
+      <div class="wrap">
+        <div class="case-bar"><span class="kicker">Case study 5 of 5</span><button class="close" data-close>Close</button></div>
+        <div class="kicker">Analytics</div>
+        <h2 id="mx-t">Music and Mental Health</h2>
+        <p class="sub">Music calms me down. But is that true for everyone, and does it depend on what you listen to, or how?</p>
+        <div class="actions">
+          <a class="pill solid" href="https://public.tableau.com/app/profile/sukriti.srivastava5327/viz/MusicMentalHealthDashboard_17736861353150/Dashboard1">Open the Tableau dashboard</a>
+          <a class="pill" href="https://mxmh-music-and-mental-health-aqzvpkdui6thkhebthdbqc.streamlit.app/">Try the live app</a>
+          <a class="pill" href="https://github.com/Sukriti-124">View code on GitHub</a>
+        </div>
+      </div>
+    </header>
+    <div class="wrap case-body">
+      <div>
+        <h3>Where the question came from</h3>
+        <p class="quote">For me, music is how I calm down. But I knew that isn't always the case, for me or for anyone else.</p>
+        <p>So I wanted to look past the usual "music is good for you" and ask a more specific question: how do different kinds of music, and different ways of engaging with it, relate to people's mental health?</p>
+
+        <h3>What I looked at</h3>
+        <p>The data is a survey where people reported their listening habits, including hours per day, favorite genres, whether they listen while working, and whether they play an instrument, compose, or explore new music. They also rated their own anxiety and depression, and said whether music improves or worsens how they feel.</p>
+        <ul class="flow" aria-label="Analysis steps">
+          <li>Survey responses</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Cleaning in Python</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Statistical analysis and modeling</li><li class="arrow" aria-hidden="true">→</li>
+          <li>Tableau dashboard and Streamlit app</li>
+        </ul>
+
+        <h3>What I found</h3>
+        <ul class="points">
+          <li><strong>The people music hurts are already struggling more.</strong> Respondents who said music worsens their mental health had significantly higher anxiety and depression scores than those who said it helps.</li>
+          <li><strong>How you engage matters more than how much.</strong> Playing an instrument, composing, or exploring new genres was a stronger predictor of feeling that music helps than total listening time.</li>
+          <li><strong>More hours don't mean better mental health.</strong> Listening longer, on its own, showed no improvement. Context did: whether you listen while working, which genres you choose, and how actively you engage.</li>
+        </ul>
+        <p>That third finding matched my own experience better than I expected. Music helps me when I choose it on purpose, not when it's just running in the background.</p>
+
+        <h3>A fair caveat</h3>
+        <p>This is self-reported survey data, so these are associations, not causes. People who feel worse may simply experience music differently, rather than music making them feel worse. The dashboard is built so you can explore the patterns yourself and draw your own conclusions.</p>
+      </div>
+      <aside class="side">
+        <div class="stat"><b>3</b><span>key findings on how music relates to anxiety and depression</span></div>
+        <div class="meta-box"><h4>Built with</h4><ul class="chips"><li>Python</li><li>Pandas</li><li>scikit-learn</li><li>Tableau</li><li>Streamlit</li></ul></div>
+      </aside>
+    </div>
+    <nav class="wrap next" aria-label="More case studies">
+      <button data-open="churnwave"><small>Previous</small><span>ChurnWave</span></button>
+      <button data-close><small>Done reading?</small><span>Back to all projects</span></button>
+    </nav>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var lastTrigger = null;
+
+  // Updating the address can be blocked in sandboxed previews; the site works either way.
+  function setHash(hash) {
+    try { history.replaceState(null, "", location.pathname + location.search + hash); } catch (err) {}
+  }
+
+  function openCase(id, trigger) {
+    var d = document.getElementById(id);
+    if (!d || typeof d.showModal !== "function") return;
+    document.querySelectorAll("dialog.case[open]").forEach(function (o) { if (o !== d) o.close(); });
+    if (trigger && !trigger.closest("dialog")) lastTrigger = trigger;
+    if (!d.open) d.showModal();
+    d.querySelector(".case-inner").scrollTop = 0;
+    document.body.classList.add("locked");
+    if (location.hash !== "#" + id) setHash("#" + id);
+  }
+
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest("[data-open]");
+    if (o) { e.preventDefault(); openCase(o.getAttribute("data-open"), o); return; }
+    var c = e.target.closest("[data-close]");
+    if (c) { c.closest("dialog").close(); }
+  });
+
+  document.querySelectorAll("dialog.case").forEach(function (d) {
+    d.addEventListener("close", function () {
+      if (!document.querySelector("dialog.case[open]")) {
+        document.body.classList.remove("locked");
+        setHash("#work");
+        if (lastTrigger) lastTrigger.focus();
+      }
+    });
+    // click on the backdrop area closes
+    d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+  });
+
+  // Deep links: sukriti-124.github.io/#healthshield opens that case study
+  var h = location.hash.slice(1);
+  if (h && document.getElementById(h) && document.getElementById(h).tagName === "DIALOG") openCase(h);
+})();
+</script>
+</body>
+</html>
